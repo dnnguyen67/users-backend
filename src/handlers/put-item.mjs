@@ -1,8 +1,9 @@
 // Create clients and set shared const values outside of the handler.
 
 // Create a DocumentClient that represents the query to add an item
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb');
+
 const client = new DynamoDBClient({});
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
@@ -12,7 +13,7 @@ const tableName = process.env.SAMPLE_TABLE;
 /**
  * A simple example includes a HTTP post method to add one item to a DynamoDB table.
  */
-export const putItemHandler = async (event) => {
+exports.putItemHandler = async (event) => {
     if (event.httpMethod !== 'POST') {
         throw new Error(`postMethod only accepts POST method, you tried: ${event.httpMethod} method.`);
     }
