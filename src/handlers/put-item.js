@@ -3,6 +3,7 @@
 // Create a DocumentClient that represents the query to add an item
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb');
+const { v4: uuidv4 } = require('uuid');
 
 const client = new DynamoDBClient({});
 const ddbDocClient = DynamoDBDocumentClient.from(client);
@@ -22,7 +23,8 @@ exports.putItemHandler = async (event) => {
 
     // Get id and name from the body of the request
     const body = JSON.parse(event.body);
-    const id = body.id;
+    const id = uuidv4();
+    console.log("Generated UUID:", id);
     const name = body.name;
 
     // Creates a new item, or replaces an old item with a new item
