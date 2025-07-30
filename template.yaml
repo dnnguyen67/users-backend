@@ -7,6 +7,14 @@ Transform:
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:
+  MyLambdaLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: my-layer-name
+      Description: layer for others functions
+      ContentUri: layer/        
+      CompatibleRuntimes:
+        - nodejs18.x   
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
@@ -84,6 +92,8 @@ Resources:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
       - DynamoDBCrudPolicy:
           TableName: !Ref SampleTable
+      Layers:
+        - !Ref MyLambdaLayer    
       Environment:
         Variables:
           # Make table name accessible as environment variable from function code during execution
@@ -93,7 +103,7 @@ Resources:
           Type: Api
           Properties:
             Path: /
-            Method: POST
+            Method: POST         
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
 

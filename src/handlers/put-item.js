@@ -26,12 +26,11 @@ exports.putItemHandler = async (event) => {
     const id = uuidv4();
     console.log("Generated UUID:", id);
     const name = body.name;
-    const email = body.email;
     // Creates a new item, or replaces an old item with a new item
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
     var params = {
         TableName : tableName,
-        Item: { id : id, name: name, email: email }
+        Item: { id : id, name: name}
     };
 
     try {
