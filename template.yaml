@@ -12,7 +12,7 @@ Resources:
     Properties:
       LayerName: my-layer-name
       Description: layer for others functions
-      ContentUri: layer/        
+      ContentUri: ../layer/        
       CompatibleRuntimes:
         - nodejs18.x   
   # Each Lambda function is defined by properties:
