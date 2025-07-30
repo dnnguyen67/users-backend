@@ -10,7 +10,7 @@ Resources:
   MyLambdaLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      LayerName: my-layer-name
+      LayerName: myLayer
       Description: layer for others functions
       ContentUri: layer/        
       CompatibleRuntimes:
